@@ -1,51 +1,131 @@
-synergy-logic@synergy-logic-ubuntu:~$ sudo apt install python3-lark python3-packaging python3-catkin-pkg python3-empy python3-numpy python3-transforms3d python3-yaml
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
-python3-lark is already the newest version (1.1.9-1).
-python3-lark set to manually installed.
-python3-packaging is already the newest version (24.0-1).
-python3-packaging set to manually installed.
-python3-empy is already the newest version (3.3.4-2).
-python3-empy set to manually installed.
-python3-numpy is already the newest version (1:1.26.4+ds-6ubuntu1).
-python3-numpy set to manually installed.
-python3-transforms3d is already the newest version (0.4.1+ds-1).
-python3-transforms3d set to manually installed.
-python3-yaml is already the newest version (6.0.1-2build2).
-python3-yaml set to manually installed.
-The following NEW packages will be installed:
-  python3-catkin-pkg
-0 upgraded, 1 newly installed, 0 to remove and 456 not upgraded.
-Need to get 3,920 B of archives.
-After this operation, 26.6 kB of additional disk space will be used.
-Do you want to continue? [Y/n] y
-Get:1 http://packages.ros.org/ros2/ubuntu noble/main amd64 python3-catkin-pkg all 1.0.0-100 [3,920 B]
-Fetched 3,920 B in 2s (2,345 B/s)              
-Selecting previously unselected package python3-catkin-pkg.
-(Reading database ... 372310 files and directories currently installed.)
-Preparing to unpack .../python3-catkin-pkg_1.0.0-100_all.deb ...
-Unpacking python3-catkin-pkg (1.0.0-100) ...
-Setting up python3-catkin-pkg (1.0.0-100) ...
-synergy-logic@synergy-logic-ubuntu:~$ cd ~/usl_drone_project
-synergy-logic@synergy-logic-ubuntu:~/usl_drone_project$ rm -rf build install log 
-synergy-logic@synergy-logic-ubuntu:~/usl_drone_project$ colcon build
-Starting >>> intent_msgs
-Starting >>> usl_drone_project
-Finished <<< usl_drone_project [1.26s]                          
---- stderr: intent_msgs                             
-CMake Warning:
-  Manually-specified variables were not used by the project:
 
-    CATKIN_INSTALL_INTO_PREFIX_ROOT
-
-
----
-Finished <<< intent_msgs [4.49s]
-
-Summary: 2 packages finished [4.78s]
-  1 package had stderr output: intent_msgs
+i still got this but i do rememeber setting this file up now so i thought id share it got this respnse synergy-logic@synergy-logic-ubuntu:~$ cd ~/usl_drone_project
+synergy-logic@synergy-logic-ubuntu:~/usl_drone_project$ source /opt/ros/jazzy/setup.bash
 synergy-logic@synergy-logic-ubuntu:~/usl_drone_project$ source install/setup.bash
 synergy-logic@synergy-logic-ubuntu:~/usl_drone_project$ ros2 launch usl_drone_project usl_gazebo.launch.py
 Package 'usl_drone_project' not found: "package 'usl_drone_project' not found, searching: ['/opt/ros/jazzy']"
-synergy-logic@synergy-logic-ubuntu:~/usl_drone_project$ 
+
+
+
+
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
+    else
+        color_prompt=
+    fi
+fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed >
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+#source /opt/ros/jazzy/setup.bash
+
+
+
