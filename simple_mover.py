@@ -3,8 +3,9 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist, Vector3
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSDurabilityPolicy
 
-# --- The Corrected Topic Name with the '/model/' prefix ---
-CMD_VEL_TOPIC = '/model/vehicle_blue/cmd_vel' 
+# --- The Topic for the Diff Drive Demo Robot ---
+# Remember to run 'ros2 topic list' to confirm this if needed!
+CMD_VEL_TOPIC = '/diff_drive/cmd_vel' 
 
 class SimpleMoverNode(Node):
     def __init__(self):
