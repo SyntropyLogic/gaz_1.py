@@ -1,58 +1,51 @@
+synergy-logic@synergy-logic-ubuntu:~$ sudo apt install python3-lark python3-packaging python3-catkin-pkg python3-empy python3-numpy python3-transforms3d python3-yaml
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+python3-lark is already the newest version (1.1.9-1).
+python3-lark set to manually installed.
+python3-packaging is already the newest version (24.0-1).
+python3-packaging set to manually installed.
+python3-empy is already the newest version (3.3.4-2).
+python3-empy set to manually installed.
+python3-numpy is already the newest version (1:1.26.4+ds-6ubuntu1).
+python3-numpy set to manually installed.
+python3-transforms3d is already the newest version (0.4.1+ds-1).
+python3-transforms3d set to manually installed.
+python3-yaml is already the newest version (6.0.1-2build2).
+python3-yaml set to manually installed.
+The following NEW packages will be installed:
+  python3-catkin-pkg
+0 upgraded, 1 newly installed, 0 to remove and 456 not upgraded.
+Need to get 3,920 B of archives.
+After this operation, 26.6 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://packages.ros.org/ros2/ubuntu noble/main amd64 python3-catkin-pkg all 1.0.0-100 [3,920 B]
+Fetched 3,920 B in 2s (2,345 B/s)              
+Selecting previously unselected package python3-catkin-pkg.
+(Reading database ... 372310 files and directories currently installed.)
+Preparing to unpack .../python3-catkin-pkg_1.0.0-100_all.deb ...
+Unpacking python3-catkin-pkg (1.0.0-100) ...
+Setting up python3-catkin-pkg (1.0.0-100) ...
 synergy-logic@synergy-logic-ubuntu:~$ cd ~/usl_drone_project
+synergy-logic@synergy-logic-ubuntu:~/usl_drone_project$ rm -rf build install log 
 synergy-logic@synergy-logic-ubuntu:~/usl_drone_project$ colcon build
-Traceback (most recent call last):
-  File "<string>", line 1, in <module>
-  File "/usr/lib/python3/dist-packages/setuptools/_distutils/core.py", line 267, in run_setup
-    exec(code, g)
-  File "<string>", line 9, in <module>
-ModuleNotFoundError: No module named 'Cython'
-[0.620s] ERROR:colcon.colcon_core.package_identification:Exception in package identification extension 'python_setup_py' in 'venv/lib/python3.12/site-packages/numpy/_core/tests/examples/cython': Command '['/usr/bin/python3', '-c', 'import sys;from contextlib import suppress;exec("with suppress(ImportError):    from setuptools.extern.packaging.specifiers    import SpecifierSet");exec("with suppress(ImportError):    from packaging.specifiers import SpecifierSet");from distutils.core import run_setup;dist = run_setup(    \'setup.py\', script_args=(\'--dry-run\',), stop_after=\'config\');skip_keys = (\'cmdclass\', \'distclass\', \'ext_modules\', \'metadata\');data = {    key: value for key, value in dist.__dict__.items()     if (        not key.startswith(\'_\') and         not callable(value) and         key not in skip_keys and         key not in dist.display_option_names    )};data[\'metadata\'] = {    k: v for k, v in dist.metadata.__dict__.items()     if k not in (\'license_files\', \'provides_extras\')};sys.stdout.buffer.write(repr(data).encode(\'utf-8\'))']' returned non-zero exit status 1.
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/colcon_core/package_identification/__init__.py", line 144, in _identify
-    retval = extension.identify(_reused_descriptor_instance)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/colcon_python_setup_py/package_identification/python_setup_py.py", line 48, in identify
-    config = get_setup_information(setup_py)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/colcon_python_setup_py/package_identification/python_setup_py.py", line 249, in get_setup_information
-    _setup_information_cache[hashable_env] = _get_setup_information(
-                                             ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/colcon_python_setup_py/package_identification/python_setup_py.py", line 296, in _get_setup_information
-    result = subprocess.run(
-             ^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/subprocess.py", line 571, in run
-    raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command '['/usr/bin/python3', '-c', 'import sys;from contextlib import suppress;exec("with suppress(ImportError):    from setuptools.extern.packaging.specifiers    import SpecifierSet");exec("with suppress(ImportError):    from packaging.specifiers import SpecifierSet");from distutils.core import run_setup;dist = run_setup(    \'setup.py\', script_args=(\'--dry-run\',), stop_after=\'config\');skip_keys = (\'cmdclass\', \'distclass\', \'ext_modules\', \'metadata\');data = {    key: value for key, value in dist.__dict__.items()     if (        not key.startswith(\'_\') and         not callable(value) and         key not in skip_keys and         key not in dist.display_option_names    )};data[\'metadata\'] = {    k: v for k, v in dist.metadata.__dict__.items()     if k not in (\'license_files\', \'provides_extras\')};sys.stdout.buffer.write(repr(data).encode(\'utf-8\'))']' returned non-zero exit status 1.
-
-[0.842s] ERROR:colcon.colcon_core.package_identification:Failed to determine Python package name in 'venv/lib/python3.12/site-packages/numpy/_core/tests/examples/limited_api'
-[0.842s] ERROR:colcon.colcon_core.package_identification:Exception in package identification extension 'python_setup_py' in 'venv/lib/python3.12/site-packages/numpy/_core/tests/examples/limited_api': Failed to determine Python package name in 'venv/lib/python3.12/site-packages/numpy/_core/tests/examples/limited_api'
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/colcon_core/package_identification/__init__.py", line 144, in _identify
-    retval = extension.identify(_reused_descriptor_instance)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/colcon_python_setup_py/package_identification/python_setup_py.py", line 57, in identify
-    raise RuntimeError(
-RuntimeError: Failed to determine Python package name in 'venv/lib/python3.12/site-packages/numpy/_core/tests/examples/limited_api'
-
-Starting >>> my-test-package
+Starting >>> intent_msgs
 Starting >>> usl_drone_project
---- stderr: usl_drone_project                                 
-error: can't copy 'resource/usl_drone_project': doesn't exist or not a regular file
----
-Failed   <<< usl_drone_project [1.19s, exited with code 1]
-Aborted  <<< my-test-package [1.20s]                     
+Finished <<< usl_drone_project [1.26s]                          
+--- stderr: intent_msgs                             
+CMake Warning:
+  Manually-specified variables were not used by the project:
 
-Summary: 0 packages finished [2.46s]
-  1 package failed: usl_drone_project
-  1 package aborted: my-test-package
-  1 package had stderr output: usl_drone_project
+    CATKIN_INSTALL_INTO_PREFIX_ROOT
+
+
+---
+Finished <<< intent_msgs [4.49s]
+
+Summary: 2 packages finished [4.78s]
+  1 package had stderr output: intent_msgs
 synergy-logic@synergy-logic-ubuntu:~/usl_drone_project$ source install/setup.bash
-synergy-logic@synergy-logic-ubuntu:~/usl_drone_project$ ros2 launch usl_drone_project usl_gazebo.launch.py
-\Package 'usl_drone_project' not found: "package 'usl_drone_project' not found, searching: ['/opt/ros/jazzy']"
-synergy-logic@synergy-logic-ubuntu:~/usl_drone_project$ source /opt/ros/jazzy/setup.bash
-synergy-logic@synergy-logic-ubuntu:~/usl_drone_project$ source install/setup.bash
-synergy-logic@synergy-logic-ubuntu:~/usl_drone_project$ source ../venv/bin/activate
-bash: ../venv/bin/activate: No such file or directory
 synergy-logic@synergy-logic-ubuntu:~/usl_drone_project$ ros2 launch usl_drone_project usl_gazebo.launch.py
 Package 'usl_drone_project' not found: "package 'usl_drone_project' not found, searching: ['/opt/ros/jazzy']"
 synergy-logic@synergy-logic-ubuntu:~/usl_drone_project$ 
