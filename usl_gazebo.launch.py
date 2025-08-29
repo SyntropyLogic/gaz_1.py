@@ -1,8 +1,11 @@
 import os
-from ament_index_python.packages import get_package_share_directory
+import sys
+import launch
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from ament_index_python.packages import get_package_share_directory
+
 
 def generate_launch_description():
 
@@ -23,3 +26,11 @@ def generate_launch_description():
     return LaunchDescription([
         start_gazebo_cmd,
     ])
+
+# --- THIS IS THE NEW CODE BLOCK ---
+# This block allows the launch file to be executed directly with 'python3'
+if __name__ == '__main__':
+    ld = generate_launch_description()
+    ls = launch.LaunchService(argv=sys.argv[1:])
+    ls.include_launch_description(ld)
+    sys.exit(ls.run())
