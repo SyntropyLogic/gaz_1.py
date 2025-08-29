@@ -3,19 +3,19 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist, Vector3
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSDurabilityPolicy
 
-# --- The Correct Topic Name for the Diff Drive Demo Robot ---
-CMD_VEL_TOPIC = '/diff_drive/cmd_vel' 
+# --- The Corrected Topic Name with the '/model/' prefix ---
+CMD_VEL_TOPIC = '/model/vehicle_blue/cmd_vel' 
 
 class SimpleMoverNode(Node):
     def __init__(self):
         super().__init__('simple_mover_node')
-        
+
         qos_profile = QoSProfile(
             reliability=QoSReliabilityPolicy.RELIABLE,
             durability=QoSDurabilityPolicy.VOLATILE,
             depth=10
         )
-        
+
         self.publisher_ = self.create_publisher(Twist, CMD_VEL_TOPIC, qos_profile)
         self.timer = self.create_timer(0.1, self.publish_command)
         
