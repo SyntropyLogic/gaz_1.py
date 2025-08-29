@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 import os
 from glob import glob
 
@@ -7,7 +7,7 @@ package_name = 'usl_drone_project'
 setup(
     name=package_name,
     version='1.0.0',
-    packages=find_packages(exclude=['test']), # Automatically find packages in src
+    packages=['src'], # Tell setuptools our python code is in the 'src' folder
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
@@ -23,7 +23,6 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            # 'executable_name = src_folder.file_name:main'
             'usl_main = src.main:main',
             'usl_command_gate = src.command_gate:main',
             'usl_adaptive_controller = src.adaptive_controller:main',
